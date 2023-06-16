@@ -5,8 +5,7 @@ import { trpc } from '../utils/trpc';
 
 export default function IndexPage() {
   // 💡 Tip: CMD+Click (or CTRL+Click) on `greeting` to go to the server definition
-  const result = trpc.greeting.useQuery({ name: 'client' });
-
+  const result = trpc.greeting.useQuery({ name: 'catto' });
   if (!result.data) {
     return (
       <div style={styles}>
@@ -22,7 +21,7 @@ export default function IndexPage() {
        * 💡 Tip: CMD+Click (or CTRL+Click) on `text` to go to the server definition
        * 💡 Tip: Secondary click on `text` and "Rename Symbol" to rename it both on the client & server
        */}
-      <h1>{result.data.text}</h1>
+      <h1>{result.data.text}</h1>{' '}
     </div>
   );
 }
@@ -30,7 +29,4 @@ export default function IndexPage() {
 const styles = {
   width: '100vw',
   height: '100vh',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
 };
