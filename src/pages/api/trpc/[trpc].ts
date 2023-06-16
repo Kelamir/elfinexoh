@@ -5,28 +5,9 @@
 import * as trpcNext from '@trpc/server/adapters/next';
 import { publicProcedure, router } from '~/server/trpc';
 import { z } from 'zod';
-import { getGameBoard, makeMove } from '~/utils/gamestate';
+import { getGameBoard, makeMove } from '~/utils/gameState';
 
 const appRouter = router({
-  greeting: publicProcedure
-    .input(
-      z.object({
-        name: z.string().nullish(),
-      })
-    )
-    .query(({ input }) => {
-      // This is what you're returning to your client
-      return {
-        text: `hello ${input?.name ?? 'world'}`,
-        // 💡 Tip: Try adding a new property here and see it propagate to the client straight-away
-      };
-    }),
-  hello: publicProcedure.query(() => {
-    return {
-      message: 'hello world',
-    };
-  }),
-
   getGameBoard: publicProcedure.query(() => {
     return getGameBoard();
   }),

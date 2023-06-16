@@ -1,24 +1,21 @@
 /**
  * This is a Next.js page.
  */
-import { useEffect } from 'react';
 import { trpc } from '../utils/trpc';
 
 export default function IndexPage() {
-  const result = trpc.greeting.useQuery({ name: 'catto' });
   const gameBoard = trpc.getGameBoard.useQuery();
-  if (!result.data) {
-    return (
-      <div style={styles}>
-        <h1>Loading...</h1>
-      </div>
-    );
-  }
+  const makeMove = trpc.makeMove.useMutation({
+    onSuccess: () => {
+      console.log('it worked');
+    },
+    onSettled: () => {
+      gameBoard.refetch();
+    },
+  });
 
-  function handleClick(index: number) {
-    // const { mutate } = trpc.makeMove.useMutation();
-    // mutate(index);
-    console.log('Hi');
+  async function handleClick(index: number) {
+    await makeMove.mutate(index);
   }
 
   return (
