@@ -5,11 +5,10 @@
 import * as trpcNext from '@trpc/server/adapters/next';
 import { publicProcedure, router } from '~/server/trpc';
 import { z } from 'zod';
+import { getGameBoard, makeMove } from '~/utils/gamestate';
 
 const appRouter = router({
   greeting: publicProcedure
-    // This is the input schema of your procedure
-    // 💡 Tip: Try changing this and see type errors on the client straight away
     .input(
       z.object({
         name: z.string().nullish(),
@@ -22,7 +21,21 @@ const appRouter = router({
         // 💡 Tip: Try adding a new property here and see it propagate to the client straight-away
       };
     }),
-  // 💡 Tip: Try adding a new procedure here and see if you can use it in the client!
+  hello: publicProcedure.query(() => {
+    return {
+      message: 'hello world',
+    };
+  }),
+
+  getGameBoard: publicProcedure.query(() => {
+    return getGameBoard();
+  }),
+
+  makeMove: publicProcedure
+    .input(z.number().min(0).max(8))
+    .mutation(({ input }) => {
+      makeMove(input);
+    }),
 });
 
 // export only the type definition of the API
