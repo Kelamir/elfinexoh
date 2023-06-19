@@ -1,6 +1,7 @@
-# Next.js + tRPC
+# ElfinExOh - TicTacToe with friends\
 
-This example shows how you can make a typed query using a minimal implementation of tRPC following [`this as a reference`](https://trpc.io/docs/client/nextjs).
+
+Notably, uses Next.js + tRPC
 
 ## Setup
 
