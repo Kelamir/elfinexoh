@@ -1,4 +1,4 @@
-# ElfinExOh - TicTacToe with friends\
+# ElfinExOh - TicTacToe with friends
 
 
 Notably, uses Next.js + tRPC
